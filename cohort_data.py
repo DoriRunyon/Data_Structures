@@ -87,19 +87,51 @@ def students_by_house(filename):
             ]
     """
 
-    all_students = []
-    gryffindor = []
-    hufflepuff = []
-    slytherin = []
-    dumbledores_army = []
-    order_of_the_phoenix = []
-    ravenclaw = []
-    tas = []
-    instructors = []
+    sort_students_into_houses(filename)
 
-    # Code goes here
+    list_of_houses = [gryffindor, hufflepuff, slytherin, dumbledores_army, order_of_the_phoenix, ravenclaw, tas, instructors]
 
-    return all_students
+    return list_of_houses
+
+
+tas = []
+instructors = []
+gryffindor = []
+ravenclaw = []
+slytherin = []
+dumbledores_army = []
+order_of_the_phoenix = []
+hufflepuff = [] 
+
+
+def sort_students_into_houses(filename): 
+    """Goes through a file and sorts people into their respective houses""" 
+
+
+    allhb = open("cohort_data.txt")
+    all_student_info = []
+    for line in allhb:
+        allhb_data = line.rstrip().split("|")
+        all_student_info.append(allhb_data)
+
+    for line in all_student_info:
+        if line[2] == "" and line[4] == "TA":
+            tas.append(line[1])
+        elif line[2] == "" and line[4] == "I":
+            instructors.append(line[1])    
+        elif line[2] == "Gryffindor": 
+            gryffindor.append(line[1])
+        elif line[2] == "Ravenclaw": 
+            ravenclaw.append(line[1])
+        elif line[2] == "Slytherin": 
+            slytherin.append(line[1])
+        elif line[2] == "Dumbledore's Army": 
+            dumbledores_army.append(line[1])
+        elif line[2] == "Order of the Phoenix": 
+            order_of_the_phoenix.append(line[1])
+        elif line[2] == "Hufflepuff": 
+            hufflepuff.append(line[1])
+    
 
 
 def all_students_tuple_list(filename):
@@ -192,9 +224,9 @@ def find_house_members_by_student_name(student_list):
 
 #print unique_houses("cohort_data.txt")
 # print sort_by_cohort("cohort_data.txt")
-# print students_by_house("cohort_data.txt")
+students_by_house("cohort_data.txt")
 #all_students_data = all_students_tuple_list("cohort_data.txt")
 #print all_students_data
-find_cohort_by_student_name()
+# find_cohort_by_student_name()
 # print find_name_duplicates("cohort_data.txt")
 # find_house_members_by_student_name(all_students_data)
